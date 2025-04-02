@@ -1,9 +1,35 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+tempestade_de_ideias = Dinamica.create!(
+    nome: "Tempestade de Ideias",
+    descricao: "Uma dinâmica para gerar ideias rapidamente em grupo."
+)
+
+construcao_em_equipe = Dinamica.create!(
+    nome: "Construção em Equipe",
+    descricao: "Atividade que incentiva a colaboração para construir algo juntos."
+)
+
+quebra_gelo = Dinamica.create!(
+    nome: "Quebra-Gelo",
+    descricao: "Dinâmica leve para introdução entre participantes."
+)
+
+Review.create!(
+    dinamica: tempestade_de_ideias,
+    comentario: "Muito divertida e produtiva!",
+    nota: 5,
+    created_at: Time.now
+)
+
+Review.create!(
+    dinamica: tempestade_de_ideias,
+    comentario: "Ajudou bastante na geração de ideias.",
+    nota: 4,
+    created_at: Time.now
+)
+
+Review.create!(
+    dinamica: construcao_em_equipe,
+    comentario: "Boa para integrar o time.",
+    nota: 5,
+    created_at: Time.now
+)
