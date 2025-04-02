@@ -1,16 +1,19 @@
 tempestade_de_ideias = Dinamica.create!(
     nome: "Tempestade de Ideias",
-    descricao: "Uma dinâmica para gerar ideias rapidamente em grupo."
+    descricao: "Uma dinâmica para gerar ideias rapidamente em grupo.",
+    participantes: ["Ana", "Bruno", "Carla"]
 )
 
 construcao_em_equipe = Dinamica.create!(
     nome: "Construção em Equipe",
-    descricao: "Atividade que incentiva a colaboração para construir algo juntos."
+    descricao: "Atividade que incentiva a colaboração para construir algo juntos.",
+    participantes: ["Daniel", "Eduarda", "Felipe"]
 )
 
 quebra_gelo = Dinamica.create!(
     nome: "Quebra-Gelo",
-    descricao: "Dinâmica leve para introdução entre participantes."
+    descricao: "Dinâmica leve para introdução entre participantes.",
+    participantes: ["Gabriel", "Helena", "Isabela"]
 )
 
 Review.create!(
