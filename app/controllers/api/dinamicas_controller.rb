@@ -3,11 +3,19 @@ class Api::DinamicasController < ApplicationController
 
     def index
         dinamicas = Dinamica.all.includes(:reviews)
-        render json: dinamicas.as_json(methods: :avaliacao_media, include: :reviews)
+        render json: dinamicas.as_json(
+            methods: :avaliacao_media,
+            include: :reviews,
+            only: [:id, :nome, :descricao, :participantes]
+        )
     end
 
     def show
-        render json: @dinamica.as_json(methods: :avaliacao_media, include: :reviews)
+        render json: @dinamica.as_json(
+            methods: :avaliacao_media,
+            include: :reviews,
+            only: [:id, :nome, :descricao, :participantes]
+        )
     end
 
     def create
@@ -34,7 +42,11 @@ class Api::DinamicasController < ApplicationController
 
     def aleatoria
         dinamica = Dinamica.order("RANDOM()").first
-        render json: dinamica.as_json(methods: :avaliacao_media, include: :reviews)
+        render json: dinamica.as_json(
+            methods: :avaliacao_media,
+            include: :reviews,
+            only: [:id, :nome, :descricao, :participantes]
+        )
     end
 
     private
@@ -44,6 +56,6 @@ class Api::DinamicasController < ApplicationController
     end
 
     def dinamica_params
-        params.require(:dinamica).permit(:nome, :descricao)
+        params.require(:dinamica).permit(:nome, :descricao, participantes: [])
     end
 end
