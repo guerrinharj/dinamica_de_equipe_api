@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV["DATABASE_HOST"] || "db" %>
+  username: <%= ENV["DATABASE_USERNAME"] || "postgres" %>
+  password: <%= ENV["DATABASE_PASSWORD"] || "password" %>
+  pool: 5
+
+development:
+  <<: *default
+  database: dinamica_de_equipe_api_development
+
+test:
+  <<: *default
+  database: dinamica_de_equipe_api_test
+
+production:
+  <<: *default
+  database: dinamica_de_equipe_api_production
