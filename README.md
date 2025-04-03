@@ -1,4 +1,33 @@
-## Versions :gem:
+# DINAMICA DE EQUIPE API
+
+Essa é uma API que desenvolvi como parte de um desafio para a Gigalink. Trata-se de uma API que gerencia dinâmicas de equipe e permite avaliações (reviews) sobre elas.
+
+
+## Models
+
+
+### Dinamica
+
+- O model ```Dinamica``` representa uma dinâmica de equipe dentro da aplicação. Cada dinâmica pode ser avaliada por meio de ```reviews``` e também possui registros de alteração (```logs```).
+- Ao excluir uma ```Dinamica```, todos os ```reviews``` associados também serão excluídos automaticamente.
+- O campo ```nome``` da dinâmica é obrigatório.
+- O campo ```descricao``` da dinâmica também é obrigatório.
+- O campo ```participantes``` é um array de strings com nomes dos participantes armazenado diretamente na tabela ```dinamicas```.
+- Calculamos a média das notas das avaliações associadas à dinâmica
+- Caso não haja ```reviews``` o valor retornado é ```null``
+
+
+
+### Review
+
+- O model ```Review``` representa uma avaliação feita sobre uma ```dinâmica``` de equipe. Cada ```review``` contém uma ```nota``` e um ```comentário``` a respeito da experiência na dinâmica.
+- Ao excluir uma ```Dinamica```, todos os ```reviews``` e ```logs``` associados também serão excluídos automaticamente.
+- O campo ```comentario``` é obrigatório. Isso garante que cada avaliação tenha um texto descritivo.
+- O campo ```nota``` também é obrigatório e deve estar dentro do intervalo de 1 a 5.
+
+
+
+## Versões :gem:
 * **Ruby:** 3.3.1
 * **Rails:** 7.1.3
 

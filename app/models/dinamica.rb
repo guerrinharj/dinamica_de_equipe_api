@@ -1,5 +1,5 @@
 class Dinamica < ApplicationRecord
-    has_many :logs, dependent: :destroy
+    has_many :logs
     has_many :reviews, dependent: :destroy
 
     validates :nome, presence: true
