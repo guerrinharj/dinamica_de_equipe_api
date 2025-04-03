@@ -2,27 +2,31 @@
 * **Ruby:** 3.3.1
 * **Rails:** 7.1.3
 
-## Setup :monorail:
-1. Run `bundle install`.
-2. Set up `config/database.yml`.
-3. Run `rails db:drop db:create db:migrate db:seed`.
-4. Run `rails s`.
+## Configurações :monorail:
+1. Execute `bundle install`.
+2. Configure `config/database.yml`.
+3. Executa `rails db:drop db:create db:migrate db:seed`.
+4. Executa `rails s`.
 
 ## Docker :whale:
 
-<p>This is a 100% dockerized application!</p>
+<p>Esta é uma aplicação 100% dockerizada!</p>
 
-#### Install Docker for Mac
-<ul>
-    <li>Install Docker Desktop: https://docs.docker.com/desktop/install/mac-install </li>
+#### Instale Docker para Mac
+<ul> 
+    <li>Instale o Docker Desktop: https://docs.docker.com/desktop/install/mac-install </li> 
 </ul>
 
-#### Install Docker for Linux
-<ul>
-    <li>Uninstall docker engine: https://docs.docker.com/engine/install/ubuntu/#uninstall-docker-engine</li>
-    <li>Install docker engine: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository</li>
-    <li>Config docker as a non-root user: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user</li>
-    <li>Config docker to start on boot: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot</li>
+#### Instale Docker para Linux
+<ul> 
+    <li>Desinstale o Docker Engine: https://docs.docker.com/engine/install/ubuntu/#uninstall-docker-engine
+    </li> 
+    <li>Instale o Docker Engine: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+    </li> 
+    <li>Configure o Docker para uso sem usuário root: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+    </li> 
+    <li>Configure o Docker para iniciar com o sistema: https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot
+    </li> 
 </ul>
 
 #### Install Docker for Linux
@@ -30,16 +34,20 @@
     <li>Do you use Windows? I'm sorry, docker doesn't work well on Windows. </li>
 </ul>
 
-#### Docker steps reminders
+#### Lembretes do Docker
 
-- Start terminal
-- Make sure of permissions of your OS and terminal system are on point. (Don't be afraid to change the shebang in case you need)
-- If you're not installing for the first time, don't overwrite archives
-- If you're installing a new gem, be always sure to rebuild.
-- This application use a series of shell scripts in order to simplify docker and rails commands, they're all written inside the devops folder.
+- Inicie o terminal
+
+- Certifique-se de que as permissões do seu sistema operacional e terminal estão corretas. (Não tenha medo de alterar o shebang se necessário)
+
+- Se você não estiver instalando pela primeira vez, não sobrescreva arquivos
+
+- Se for instalar uma nova gem, sempre lembre-se de reconstruir
+
+- Esta aplicação utiliza uma série de scripts shell para simplificar comandos do Docker e do Rails, todos estão escritos dentro da pasta devops.
 
 
-### Build, up the container and start Sidekiq
+### Builda e suba 
 
 
 ```bash
@@ -48,25 +56,25 @@
   ./devops/compose/up.sh
 ```
 
-### Start the DB
+### Comece ou reinicie a DB
 
 ```bash
     ./devops/rails/restart.sh
 ```
 
-### Run Rails console
+### Execute o console de Rails
 
 ```bash
     ./devops/rails/console.sh
 ```
 
-### Update DB and Rails
+### Update na DB
 
 ```bash
     ./devops/rails/update.sh
 ```
 
-### Uninstall
+### Desinstale e delete containers
 
 ```bash
   ./devops/compose/down.sh
@@ -75,8 +83,8 @@
 
 ## DB reminders
 
-- If you're having trouble when opening on a DB management system (like Beekeeper, DBeaver, PG Admin, etc.), don't forget that you need to run the container and use localhost as your host. 
-- If any role issues appear Don't be afraid to pkill postgres and brew services stop postgresql (If you're running in homebrew).
-- If you are having trouble with users accessing the DB, rebuild the container.
+- Se você estiver tendo problemas ao abrir em um sistema de gerenciamento de banco (como Beekeeper, DBeaver, PG Admin, etc.), não esqueça que é necessário rodar o container e usar localhost como host. 
+- Se aparecerem problemas com papéis (roles), não hesite em usar ```pkill postgres``` e ```brew services stop postgresql``` (caso esteja usando o Homebrew).
+- Se estiver com problemas de usuários acessando o banco, builda novamente o container.
 
-<h2>That's it. Happy coding :computer:</h2> 
+<h2>E é isso! :computer:</h2> 
