@@ -329,7 +329,7 @@ curl --location 'http://localhost:3000/api/participantes'
   ./devops/compose/delete.sh
 ```
 
-## DB reminders
+## DB lembretes
 
 - Se você estiver tendo problemas ao abrir em um sistema de gerenciamento de banco (como Beekeeper, DBeaver, PG Admin, etc.), não esqueça que é necessário rodar o container e usar localhost como host. 
 - Se aparecerem problemas com papéis (roles), não hesite em usar ```pkill postgres``` e ```brew services stop postgresql``` (caso esteja usando o Homebrew).
