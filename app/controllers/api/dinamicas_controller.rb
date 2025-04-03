@@ -26,6 +26,11 @@ class Api::DinamicasController < ApplicationController
     def create
         dinamica = Dinamica.new(dinamica_params)
         if dinamica.save
+            Log.create!(
+                action: "create",
+                dinamica: dinamica,
+                data_nova: dinamica.attributes
+            )
             Rails.cache.delete("dinamicas_index")
             Rails.cache.delete("dinamica_aleatoria")
             render json: dinamica, status: :created
@@ -33,9 +38,17 @@ class Api::DinamicasController < ApplicationController
             render json: dinamica.errors, status: :unprocessable_entity
         end
     end
+    
 
     def update
+        old_data = @dinamica.attributes
         if @dinamica.update(dinamica_params)
+            Log.create!(
+                action: "update",
+                dinamica: @dinamica,
+                data_anterior: old_data,
+                data_nova: @dinamica.attributes
+            )
             Rails.cache.delete("dinamicas_index")
             Rails.cache.delete("dinamica_aleatoria")
             render json: @dinamica
@@ -45,7 +58,13 @@ class Api::DinamicasController < ApplicationController
     end
 
     def destroy
+        old_data = @dinamica.attributes
         @dinamica.destroy
+        Log.create!(
+            action: "destroy",
+            dinamica_id: old_data["id"],
+            data_anterior: old_data
+        )
         Rails.cache.delete("dinamicas_index")
         Rails.cache.delete("dinamica_aleatoria")
         head :no_content
