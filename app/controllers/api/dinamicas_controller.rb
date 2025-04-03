@@ -2,7 +2,7 @@ class Api::DinamicasController < ApplicationController
     before_action :set_dinamica, only: [:show, :update, :destroy]
 
     def index
-        dinamicas = Rails.cache.fetch("dinamicas_index", expires_in: 10.minutes) do
+        dinamicas = Rails.cache.fetch("dinamicas_index", expires_in: 2.minutes) do
             Dinamica.all.includes(:reviews).map do |dinamica|
                 dinamica.as_json(
                     methods: :avaliacao_media,
@@ -71,7 +71,7 @@ class Api::DinamicasController < ApplicationController
     end
 
     def aleatoria
-        dinamica = Rails.cache.fetch("dinamica_aleatoria", expires_in: 5.minutes) do
+        dinamica = Rails.cache.fetch("dinamica_aleatoria", expires_in: 2.minutes) do
             Dinamica.order("RANDOM()").first&.as_json(
                 methods: :avaliacao_media,
                 include: :reviews,

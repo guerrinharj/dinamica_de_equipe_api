@@ -47,8 +47,8 @@ RSpec.describe Api::DinamicasController, type: :request do
     describe "PATCH /api/dinamicas/:id" do
         it "updates an existing dinamica" do
             patch "/api/dinamicas/#{dinamica.id}",
-                  params: { dinamica: { nome: "Nome Atualizado" } }.to_json,
-                  headers: { "CONTENT_TYPE" => "application/json" }
+                    params: { dinamica: { nome: "Nome Atualizado" } }.to_json,
+                    headers: { "CONTENT_TYPE" => "application/json" }
 
             expect(response).to have_http_status(:ok)
         end
