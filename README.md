@@ -27,6 +27,225 @@ Essa é uma API que desenvolvi como parte de um desafio para a Gigalink. Trata-s
 
 
 
+## Routes
+
+### ```GET /api/dinamicas```
+
+- Retorna todas as ```dinâmicas``` cadastradas.
+- Inclui os campos ```id```, ```nome```, ```descricao```, ```participantes```, ```avaliacao_media``` e os ```reviews``` associados.
+
+
+**Request:**
+```bash
+curl --location 'http://localhost:3000/api/dinamicas'
+```
+
+**200 Response:**
+```json
+[
+    {
+        "id": 1,
+        "nome": "Tempestade de Ideias",
+        "descricao": "Dinâmica para gerar ideias em grupo.",
+        "participantes": ["Ana", "Bruno", "Carla"],
+        "avaliacao_media": 4.5,
+        "reviews": ['...']
+    }
+]
+```
+
+### ```GET /api/dinamicas/:id```
+
+- Retorna os dados de uma ```dinâmica``` específica.
+- Inclui ```participantes```, ```avaliações``` e ```nota média```.
+
+
+
+
+**Request:**
+```bash
+curl --location 'http://localhost:3000/api/dinamicas/1'
+```
+
+**200 Response:**
+```json
+{
+    "id": 1,
+    "nome": "Tempestade de Ideias",
+    "descricao": "Dinâmica para gerar ideias em grupo.",
+    "participantes": ["Ana", "Bruno", "Carla"],
+    "avaliacao_media": 4.5,
+    "reviews": [...]
+}
+```
+
+
+### ```POST /api/dinamicas```
+
+- Cria uma nova ```dinâmica``` com participantes.
+- Exige os campos ```nome```, ```descricao``` e ```participantes``` (array de strings).
+
+
+**Request:**
+```bash
+curl --location 'http://localhost:3000/api/dinamicas' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dinamica": {
+    "nome": "Nova Dinâmica",
+    "descricao": "Descrição de teste",
+    "participantes": ["João", "Maria"]
+  }
+}'
+
+```
+
+**200 Response:**
+```json
+{
+    "id": 5,
+    "nome": "Nova Dinâmica",
+    "descricao": "Descrição de teste",
+    "participantes": ["João", "Maria"],
+    "created_at": "2025-04-03T18:05:21.112Z",
+    "updated_at": "2025-04-03T18:05:21.112Z"
+}
+```
+
+
+### ```PATCH /api/dinamicas/:id```
+
+- Atualiza os dados de uma ```dinâmica``` existente.
+- Pode alterar ```nome```, ```descrição``` ou lista de ```participantes```.
+
+**Request:**
+```bash
+curl --location --request PATCH 'http://localhost:3000/api/dinamicas/1' \
+--header 'Content-Type: application/json' \
+--data '{
+  "dinamica": {
+    "nome": "Dinâmica Atualizada",
+    "participantes": ["Pedro", "Laura"]
+  }
+}'
+```
+
+**200 Response:**
+```json
+{
+    "id": 1,
+    "nome": "Dinâmica Atualizada",
+    "descricao": "Dinâmica para gerar ideias em grupo.",
+    "participantes": ["Pedro", "Laura"]
+}
+```
+
+
+### ```DELETE /api/dinamicas/:id```
+
+- Remove uma ```dinâmica``` do sistema.
+
+
+**Request:**
+```bash
+curl --location --request DELETE 'http://localhost:3000/api/dinamicas/1'
+```
+
+**200 Response:**
+Sem conteúdo.
+```json
+```
+
+
+
+### ```GET /api/dinamicas/aleatoria```
+
+- Retorna uma ```dinâmica``` aleatória do banco de dados.
+
+
+**Request:**
+```bash
+curl --location 'http://localhost:3000/api/dinamicas/aleatoria'
+```
+
+**200 Response:**
+```json
+{
+    "id": 3,
+    "nome": "Quebra-Gelo",
+    "descricao": "Dinâmica leve para introdução entre participantes.",
+    "participantes": ["Gabriel", "Helena", "Isabela"],
+    "avaliacao_media": 4.0,
+    "reviews": [...]
+}
+```
+
+
+
+### ```POST /api/dinamicas/:dinamica_id/reviews```
+
+- Cria uma nova avaliação (```review```) para a ```dinâmica``` especificada.
+- Requer os campos ```comentario``` e ```nota``` (de 1 a 5).
+
+
+**Request:**
+```bash
+curl --location --request POST 'http://localhost:3000/api/dinamicas/1/reviews' \
+--header 'Content-Type: application/json' \
+--data '{
+  "review": {
+    "comentario": "Muito boa!",
+    "nota": 5
+  }
+}'
+
+```
+
+**200 Response:**
+```json
+{
+    "id": 7,
+    "dinamica_id": 1,
+    "comentario": "Muito boa!",
+    "nota": 5,
+    "created_at": "2025-04-03T18:07:10.321Z"
+}
+
+```
+
+
+
+### ```GET /api/participantes```
+
+- Retorna uma lista de todos os nomes de ```participantes``` já cadastrados em qualquer ```dinâmica```.
+- Os nomes são únicos, ordenados em ordem alfabética e vêm do array de cada dinâmica.
+
+
+**Request:**
+```bash
+curl --location 'http://localhost:3000/api/participantes'
+```
+
+**200 Response:**
+```json
+["Ana", "Bruno", "Carla", "Daniel", "Eduarda", "Felipe", "Gabriel", "Helena", "Isabela", "João", "Laura", "Maria", "Pedro"]
+```
+
+
+## Redis
+
+- Usamos Redis como sistema de cache. Ele armazena dados temporariamente para que o sistema não precise consultar o banco de dados tradicional (PostgreSQL) com tanta frequência, melhorando a performance da API.
+
+- A aplicação usa um container Redis isolado, definido no ```docker-compose.yml```.
+
+- A porta padrão ```6379``` é exposta para que a aplicação Rails possa se conectar.
+
+
+## TDD
+
+- Este projeto segue a prática de TDD (Test-Driven Development), utilizando ```RSpec``` (framework de testes) e ```FactoryBot``` (ferramenta para criar objetos de teste de forma limpa e reutilizável.)
+
+
 ## Versões :gem:
 * **Ruby:** 3.3.1
 * **Rails:** 7.1.3
