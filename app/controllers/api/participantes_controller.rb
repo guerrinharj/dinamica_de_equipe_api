@@ -1,10 +1,7 @@
 class Api::ParticipantesController < ApplicationController
     def index
-        participantes = Rails.cache.fetch("participantes", expires_in: 10.minutes) do
-            ["Ana", "Bruno", "Carla", "Daniel", "Eduarda", "Felipe"]
-        end
-    
+        participantes = Dinamica.pluck(:participantes).flatten.compact.uniq.sort
+
         render json: participantes
     end
-    
 end
