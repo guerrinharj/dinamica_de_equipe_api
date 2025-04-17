@@ -71,16 +71,15 @@ class Api::DinamicasController < ApplicationController
     end
 
     def aleatoria
-        dinamica = Rails.cache.fetch("dinamica_aleatoria", expires_in: 2.minutes) do
-            Dinamica.order("RANDOM()").first&.as_json(
-                methods: :avaliacao_media,
-                include: :reviews,
-                only: [:id, :nome, :descricao, :participantes]
-            )
-        end
+        dinamica = Dinamica.order("RANDOM()").first&.as_json(
+            methods: :avaliacao_media,
+            include: :reviews,
+            only: [:id, :nome, :descricao, :participantes]
+        )
 
         render json: dinamica
     end
+
 
     private
 
