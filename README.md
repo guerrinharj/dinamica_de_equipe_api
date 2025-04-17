@@ -286,6 +286,8 @@ curl --location 'http://localhost:3000/api/participantes'
 
 - Inicie o terminal
 
+- Você precisa de um arquivo ```.env``` para a aplicação funcionar, caso não saiba um use o ```.env.example``` que se encontra na root do projeto.
+
 - Certifique-se de que as permissões do seu sistema operacional e terminal estão corretas. (Não tenha medo de alterar o shebang se necessário)
 
 - Se você não estiver instalando pela primeira vez, não sobrescreva arquivos
