@@ -18,7 +18,7 @@ Rails.application.configure do
   config.server_timing = true
 
   config.cache_store = :redis_cache_store, {
-    url: ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" }
+    url: ENV.fetch("REDIS_URL") { "redis://redis:6379/1" }
   }
   config.action_controller.perform_caching = true
 
