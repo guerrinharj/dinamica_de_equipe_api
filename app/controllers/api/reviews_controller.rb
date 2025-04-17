@@ -4,6 +4,8 @@ class Api::ReviewsController < ApplicationController
         review = dinamica.reviews.build(review_params)
 
         if review.save
+            Rails.cache.delete("dinamicas_index")
+            Rails.cache.delete("dinamica_aleatoria")
             render json: review, status: :created
         else
             render json: review.errors, status: :unprocessable_entity
